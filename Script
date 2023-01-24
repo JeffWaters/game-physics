@@ -1,0 +1,40 @@
+#include <Box2D/Box2D.h>
+
+int main() {
+    // create world
+    b2Vec2 gravity(0.0f, -10.0f);
+    b2World world(gravity);
+
+    // create body
+    b2BodyDef body_def;
+    body_def.type = b2_dynamicBody;
+    body_def.position.Set(0.0f, 4.0f);
+    b2Body* body = world.CreateBody(&body_def);
+
+    // create shape
+    b2PolygonShape shape;
+    shape.SetAsBox(1.0f, 1.0f);
+
+    // create fixture
+    b2FixtureDef fixture_def;
+    fixture_def.shape = &shape;
+    fixture_def.density = 1.0f;
+    body->CreateFixture(&fixture_def);
+
+    // run game loop
+    float time_step = 1.0f / 60.0f;
+    int velocity_iterations = 6;
+    int position_iterations = 2;
+    while (true) {
+        // handle input
+
+        // update physics
+        world.Step(time_step, velocity_iterations, position_iterations);
+
+        // render
+
+        // sleep
+    }
+
+    return 0;
+}
